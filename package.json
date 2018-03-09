@@ -5,22 +5,39 @@
     "version": "0.0.1",
     "publisher": "FMark",
     "engines": {
-        "vscode": "^1.21.0"
+        "vscode": "^1.20.0"
     },
     "categories": [
-        "Other"
+        "Languages"
     ],
     "activationEvents": [
-        "onCommand:extension.sayHello"
+        "onLanguage:fmark",
+        "onCommand:fmark.openPreview"
     ],
-    "main": "./extension",
+    "main": "./src/extension",
+    "license": "MIT",
     "contributes": {
         "commands": [
             {
-                "command": "extension.sayHello",
-                "title": "Hello World"
+                "command": "fmark.openPreview",
+                "title": "FMark: Open Preview"
+            },
+            {
+                "command": "fmark.recompile",
+                "title": "FMark: Recompile"
             }
-        ]
+        ],
+        "languages": [{
+            "id": "fmark",
+            "aliases": ["FMark", "fmark"],
+            "extensions": [".fmark"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "fmark",
+            "scopeName": "source.fmark",
+            "path": "./syntaxes/fmark.tmLanguage.json"
+        }]
     },
     "scripts": {
         "postinstall": "node ./node_modules/vscode/bin/install",

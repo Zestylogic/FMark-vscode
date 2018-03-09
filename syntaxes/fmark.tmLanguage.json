@@ -1,0 +1,257 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "FMark",
+	"patterns": [
+		{
+			"include": "#macro"
+		},
+		{
+			"include": "#eval"
+		},
+		{
+			"include": "#heading"
+		},
+		{
+			"include": "#inline"
+		},
+		{
+			"include": "#codeblock"
+		},
+		{
+			"include": "#strings"
+		},
+		{
+			"include": "#table"
+		},
+		{
+			"include": "#characters"
+		}
+	],
+	"repository": {
+		"macro": {
+			"patterns": [
+				{
+					"name": "entity.function.fmark",
+					"match": "({%)\\s*(macro)\\s*(\\w+)\\s*\\((.*)\\)",
+					"captures": {
+						"1": {
+							"name": "keyword.operator.fmark"
+						},
+						"2": {
+							"name": "storage.type.fmark"
+						},
+						"3": {
+							"name": "variable.parameter.fmark"
+						},
+						"4": {
+							"patterns": [
+								{
+									"name": "variable.name.fmark",
+									"match": "\\w+"
+								},
+								{
+									"name": "keyword.operator.fmark",
+									"match": ";"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "entity.function.fmark",
+					"match": "({%)\\s*(macro)\\s*(\\w+)",
+					"captures": {
+						"1": {
+							"name": "keyword.operator.fmark"
+						},
+						"2": {
+							"name": "storage.type.fmark"
+						},
+						"3": {
+							"name": "variable.parameter.fmark"
+						}
+					}
+				}
+			]
+		},
+		"eval": {
+			"patterns": [
+				{
+					"name": "entity.function.fmark",
+					"match": "({{)\\s*(\\w+)\\s*(}})",
+					"captures": {
+						"1": {
+							"name": "keyword.operator.fmark"
+						},
+						"2": {
+							"name": "variable.parameter.fmark"
+						},
+						"3": {
+							"name": "keyword.operator.fmark"
+						}
+					}
+				},
+				{
+					"name": "entity.function.fmark",
+					"match": "({{)\\s*(\\w+)\\s*\\((.*?)\\)\\s*(}})",
+					"captures": {
+						"1": {
+							"name": "keyword.operator.fmark"
+						},
+						"2": {
+							"name": "variable.parameter.fmark"
+						},
+						"3": {
+							"patterns": [
+								{
+									"name": "keyword.operator.fmark",
+									"match": ";"
+								},
+								{
+									"name": "variable.name.fmark",
+									"match": "\\w+"
+								}
+							]
+						},
+						"4": {
+							"name": "keyword.operator.fmark"
+						}
+					}
+				}
+			]
+		},
+		"heading": {
+			"patterns": 
+			[
+				{
+					"name": "markup.heading.1.fmark",
+					"match": "^#\\s.*$"
+				},
+				{
+					"name": "markup.heading.2.fmark",
+					"match": "^##\\s.*$"
+				},
+				{
+					"name": "markup.heading.3.fmark",
+					"match": "^###\\s.*$"
+				},
+				{
+					"name": "markup.heading.4.fmark",
+					"match": "^####\\s.*$"
+				},
+				{
+					"name": "markup.heading.5.fmark",
+					"match": "^#####\\s.*$"
+				},
+				{
+					"name": "markup.heading.6.fmark",
+					"match": "^######\\s.*$"
+				}
+			]
+		},
+		"inline": {
+			"patterns": [
+				{
+					"name": "markup.italic.fmark",
+					"match": "\\*[a-zA-Z0-9_](.*)[a-zA-Z0-9_]\\*"
+				},
+				{
+					"name": "markup.italic.fmark",
+					"match": "_[a-zA-Z0-9*](.*)[a-zA-Z0-9*]_"
+				},
+				{
+					"match": "`(.*)`",
+					"captures": {
+						"1": {
+							"name": "markup.raw.fmark"
+						}
+					}
+				},
+				{
+					"name": "markup.other.strikethrough.fmark",
+					"match": "~~[a-zA-Z0-9*_](.*)[a-zA-Z0-9*_]~~"
+				},
+				{
+					"name": "markup.bold.fmark",
+					"match": "__[a-zA-Z0-9*](.*)[a-zA-Z0-9*]__"
+				},
+				{
+					"name": "markup.bold.fmark",
+					"match": "\\*\\*[a-zA-Z0-9_](.*)[a-zA-Z0-9_]\\*\\*"
+				}
+			]
+		},
+		"codeblock": {
+			"begin": "^```+",
+			"end": "^```+",
+			"patterns": [
+				{
+					
+				}
+			]
+		},
+		"strings": {
+			"name": "string.quoted.double.fmark",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"name": "constant.character.escape.fmark",
+					"match": "\\\\."
+				}
+			]
+		},
+		"table": {
+			"name": "entity.other.table.fmark",
+			"match": "=(.*?)\\|",
+			"captures": [
+				{
+					"patterns": [
+						{
+							"name": "constant.numeric.formula.fmark",
+							"match": "[0-9]"
+						},
+						{
+							"name": "keyword.operator.fmark",
+							"match": "\\*|\\+|/|-|:"
+						},
+						{
+							"match": "(AVG|SUM|MIN|MAX)\\s*\\{(.*)\\}",
+							"captures": {
+								"1": {
+									"name": "support.function.fmark"
+								},
+								"2": {
+									"match": "(\\[\\s*[0-9]+\\s*,\\s*[0-9]+\\s*\\])",
+									"captures": {
+										"1": {
+											"name": "variable.parameter.fmark"
+										}
+									},
+									"patterns": [
+										{
+											"name": "keyword.operator.fmakr",
+											"match": ":"
+										}
+									]
+								}
+							}
+						}
+					]
+				}
+			],
+			"patterns": [
+				
+			]
+		},
+		"characters": {
+			"patterns": [
+				{
+					"name": "keyword.operator.fmark",
+					"match": "\\{\\%|\\%\\}|\\{\\{|\\}\\}|\\$"
+				}
+			]
+		}
+	},
+	"scopeName": "source.fmark"
+}
