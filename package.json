@@ -2,8 +2,9 @@
     "name": "fmark",
     "displayName": "FMark",
     "description": "FMark plugin",
-    "version": "0.0.1",
-    "publisher": "FMark",
+    "version": "0.0.3",
+    "publisher": "fmark",
+    "repository": "https://github.com/ymherklotz/FMark-vscode",
     "engines": {
         "vscode": "^1.20.0"
     },
@@ -27,17 +28,26 @@
                 "title": "FMark: Recompile"
             }
         ],
-        "languages": [{
-            "id": "fmark",
-            "aliases": ["FMark", "fmark"],
-            "extensions": [".fmark"],
-            "configuration": "./language-configuration.json"
-        }],
-        "grammars": [{
-            "language": "fmark",
-            "scopeName": "source.fmark",
-            "path": "./syntaxes/fmark.tmLanguage.json"
-        }]
+        "languages": [
+            {
+                "id": "fmark",
+                "aliases": [
+                    "FMark",
+                    "fmark"
+                ],
+                "extensions": [
+                    ".fmark"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "fmark",
+                "scopeName": "source.fmark",
+                "path": "./syntaxes/fmark.tmLanguage.json"
+            }
+        ]
     },
     "scripts": {
         "postinstall": "node ./node_modules/vscode/bin/install",

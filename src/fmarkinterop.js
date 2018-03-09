@@ -1,30 +1,36 @@
-const vscode = require('vscode')
+const vscode = require('vscode');
+
+function isFMarkFile(document) {
+    return document.languageId === 'fmark';
+}
+
+function openPreview(uri) {
+    console.log('Opened preview for FMark.');
+    console.log('File location: ' + uri.toString());
+    return vscode.commands.executeCommand(
+        'vscode.previewHtml',
+        uri,
+        vscode.ViewColumn.Two,
+        'Preview'
+    );
+}
+
+function recompileFMarkFile(uri) {
+    console.log('Recompiling: ' + uri.toString());
+}
+
+function recompileAllFMark() {
+    vscode.workspace.textDocuments.forEach(document => {
+        console.log("Recompiling everything")
+        if(isFMarkFile(document)) {
+            console.log("Found fmark file at: " + document.uri)
+            recompileFMarkFile(document.uri);
+        }
+    });
+}
 
 module.exports = {
-    openPreview: function(uri) {
-        console.log('Opened preview for FMark.');
-        console.log('File location: ' + uri.toString());
-        return vscode.commands.executeCommand(
-            'vscode.previewHtml',
-            uri,
-            vscode.ViewColumn.Two,
-            'Preview'
-        );
-    },
-
-    recompileFMarkFile: function(uri) {
-        console.log('Recompiling: ' + uri.toString());
-    },
-
-    recompileAllFMark: function() {
-        vscode.workspace.textDocuments.forEach(document => {
-            if(this.isFMarkFile(document)) {
-                this.recompileAllFMark(document.uri);
-            }
-        });
-    },
-
-    isFMarkFile: function(document) {
-        return document.languageId === 'fmark';
-    },
+    openPreview,
+    recompileFMarkFile,
+    recompileAllFMark,
 }
