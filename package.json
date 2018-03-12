@@ -28,6 +28,12 @@
                 "title": "FMark: Recompile"
             }
         ],
+        "keybindings": [
+            {
+                "command": "fmark.openPreview",
+                "key": "shift+ctrl+m"
+            }
+        ],
         "languages": [
             {
                 "id": "fmark",
