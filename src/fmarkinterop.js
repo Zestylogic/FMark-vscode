@@ -1,7 +1,6 @@
 const vscode = require('vscode');
-const fmark = require('./FMark/FMark/js/fmark.js')
-
-var singlePreviewSourceUri = null;
+const fmark = require('./FMark/FMark/js/fmark.js');
+const path = require('path');
 
 class FMarkContentProvider {
 
@@ -25,7 +24,7 @@ class FMarkContentProvider {
             for(var i = 0; i < doc.lineCount; ++i) {
                 docArray.push(doc.lineAt(i).text);
             }
-            return fmark.processMarkdownString(docArray).data;
+            return fmark.processMarkdownString(path.dirname(uri.path)+'/', docArray).data;
         });
         return this._onDidChange.fire(getPreviewUri(uri));
     }
@@ -71,8 +70,6 @@ function recompileAllFMark() {
 }
 
 function getPreviewUri(uri) {
-    singlePreviewSourceUri = uri;
-
     var previewUri = uri;
 
     previewUri = vscode.Uri.parse('fmark-preview://single-preview.rendered');
