@@ -93,7 +93,7 @@
 				},
 				{
 					"name": "entity.function.fmark",
-					"match": "({{)\\s*(\\w+)\\s*\\((.*?)\\)\\s*(}})",
+					"match": "({{)\\s*(\\w+)\\s*\\((.*)\\)\\s*(}})",
 					"captures": {
 						"1": {
 							"name": "keyword.operator.fmark"
@@ -112,6 +112,24 @@
 									"match": "\\w+"
 								}
 							]
+						},
+						"4": {
+							"name": "keyword.operator.fmark"
+						}
+					}
+				},
+				{
+					"name": "entity.function.fmark",
+					"match": "({{)\\s*(include)\\s*(.*?)\\s*(}})",
+					"captures": {
+						"1": {
+							"name": "keyword.operator.fmark"
+						},
+						"2": {
+							"name": "support.function.fmark"
+						},
+						"3": {
+							"name": "string.quoted.double.fmark"
 						},
 						"4": {
 							"name": "keyword.operator.fmark"
