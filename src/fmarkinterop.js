@@ -25,10 +25,7 @@ class FMarkContentProvider {
                 docArray.push(doc.lineAt(i).text);
             }
             
-            var correctPath = (path.dirname(uri.path)+'/')
-            //if (isWindows){
-            var correctPath = correctPath.replace(/[a-z]+:\//,"")
-            //}
+            var correctPath = (path.dirname(uri.path)+'/').replace(/^[a-z]+:\//,"")
             return fmark.processMarkdownString(correctPath, docArray).data;
         });
         return this._onDidChange.fire(getPreviewUri(uri));
