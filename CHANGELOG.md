@@ -25,3 +25,7 @@ All notable changes to the "fmark" extension will be documented in this file.
 - Added include of other fmark files
 - Added function calls inside argument lists
 - Added examples to repo
+
+## 0.1.4
+
+- Adding windows file path fix for relative includes
