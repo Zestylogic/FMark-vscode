@@ -1,5 +1,6 @@
 const vscode = require('vscode');
 const fmark = require('./FMark/FMark/js/fmark.js');
+const beautify = require('js-beautify').html
 const path = require('path');
 
 class FMarkContentProvider {
@@ -26,7 +27,7 @@ class FMarkContentProvider {
             }
             
             var correctPath = (path.dirname(uri.path)+'/').replace(/^[a-z]+:\//,"")
-            return fmark.processMarkdownString(correctPath, docArray).data;
+            return beautify(fmark.processMarkdownString(correctPath, docArray).data);
         });
         return this._onDidChange.fire(getPreviewUri(uri));
     }
