@@ -21,14 +21,9 @@ class FMarkContentProvider {
 
     updateFMark(uri) {
         uri = vscode.window.activeTextEditor.document.uri;
-        this.content = vscode.workspace.openTextDocument(uri).then((doc) => {
-            var docArray = [];
-            for(var i = 0; i < doc.lineCount; ++i) {
-                docArray.push(doc.lineAt(i).text);
-            }
-            var correctPath = path.dirname(uri.path)+'/'
-            return fmark.processMarkdownString(correctPath, docArray).data;
-        });
+        // New fix for windows, remove leading forward slash
+        var correctPath = (path.dirname(uri.path)+'/').replace(/^\//,"")
+        this.content = generateHTML(uri,correctPath);
         return this._onDidChange.fire(getPreviewUri(uri));
     }
 
@@ -54,14 +49,13 @@ function generateHTML(uri,fPath) {
     return html;
 }
 
-function makehtml() {
+function makehtml(uri) {
     // Save to file
     uri = vscode.window.activeTextEditor.document.uri;
-    var correctPath = (path.dirname(uri.path)+'/').replace(/^[a-z]+:\//,"C:\/");
+    var correctPath = (path.dirname(uri.path)+'/').replace(/^\//,"");
     var html = generateHTML(uri,correctPath);
-    var filename = (vscode.window.activeTextEditor.document.fileName).replace(/(.*)(\.(fmark|md))/,"$1.html")
-    console.log(filename);
-    fs.writeFileSync(filename, html._value); //this line doesn't work.
+    var filename = (vscode.window.activeTextEditor.document.fileName).replace(/(.*)(\.(fmark|md))/,"$1.html");
+    fs.writeFileSync(filename, html._value);
     return true;
 }
 
