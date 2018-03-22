@@ -2,9 +2,12 @@
 
 ## Quickstart
 
-- git clone --recurse https://github.com/ymherklotz/FMark-vscode.git
-- cd Fmark-vscode/src/FMark
-- `git checkout <your-branch>` and `build.sh -b js`
+```
+git clone --recurse https://github.com/ymherklotz/FMark-vscode.git
+cd Fmark-vscode/src/FMark
+git checkout <your-branch>
+build.sh -b js
+```
 - On VSCode do 'Open Folder' and select FMark VSCode
 - Press F5 to launch the extension in a dev window
 - Open a .fmark file in the Dev window and press ctrl+shift+M to open the preview
