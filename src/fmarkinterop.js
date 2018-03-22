@@ -1,6 +1,7 @@
 const vscode = require('vscode');
 const fmark = require('./FMark/FMark/js/fmark.js');
-const beautify = require('js-beautify').html
+const beautify = require('js-beautify').html;
+const fs = require('graceful-fs');
 const path = require('path');
 
 class FMarkContentProvider {
@@ -25,9 +26,8 @@ class FMarkContentProvider {
             for(var i = 0; i < doc.lineCount; ++i) {
                 docArray.push(doc.lineAt(i).text);
             }
-            
-            var correctPath = (path.dirname(uri.path)+'/').replace(/^[a-z]+:\//,"")
-            return beautify(fmark.processMarkdownString(correctPath, docArray).data);
+            var correctPath = path.dirname(uri.path)+'/'
+            return fmark.processMarkdownString(correctPath, docArray).data;
         });
         return this._onDidChange.fire(getPreviewUri(uri));
     }
@@ -41,6 +41,28 @@ class FMarkContentProvider {
             }, 300);
         }
     }
+}
+
+function generateHTML(uri,fPath) {
+    var html = vscode.workspace.openTextDocument(uri).then((doc) => {
+        var docArray = [];
+        for(var i = 0; i < doc.lineCount; ++i) {
+            docArray.push(doc.lineAt(i).text);
+        }
+        return beautify(fmark.processMarkdownString(fPath, docArray).data);
+    });
+    return html;
+}
+
+function makehtml() {
+    // Save to file
+    uri = vscode.window.activeTextEditor.document.uri;
+    var correctPath = (path.dirname(uri.path)+'/').replace(/^[a-z]+:\//,"C:\/");
+    var html = generateHTML(uri,correctPath);
+    var filename = (vscode.window.activeTextEditor.document.fileName).replace(/(.*)(\.(fmark|md))/,"$1.html")
+    console.log(filename);
+    fs.writeFileSync(filename, html._value); //this line doesn't work.
+    return true;
 }
 
 function isFMarkFile(document) {
@@ -74,9 +96,7 @@ function recompileAllFMark() {
 
 function getPreviewUri(uri) {
     var previewUri = uri;
-
     previewUri = vscode.Uri.parse('fmark-preview://single-preview.rendered');
-
     return previewUri;
 }
 
@@ -85,4 +105,5 @@ module.exports = {
     openPreview,
     isFMarkFile,
     getPreviewUri,
+    makehtml
 }

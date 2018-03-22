@@ -26,6 +26,10 @@
             {
                 "command": "fmark.recompile",
                 "title": "FMark: Recompile"
+            },
+            {
+                "command": "fmark.makehtml",
+                "title": "FMark: Generate HTML File"
             }
         ],
         "keybindings": [
