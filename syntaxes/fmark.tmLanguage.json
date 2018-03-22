@@ -201,6 +201,10 @@
 				{
 					"name": "markup.italic.fmark",
 					"match": "\\*\\*\\*[a-zA-Z0-9_](.*)[a-zA-Z0-9_]\\*\\*\\*"
+				},
+				{
+					"name": "markup.deleted.fmark",
+					"match": "~~[a-zA-Z0-9_](.*)[a-zA-Z0-9_]~~"
 				}
 			]
 		},
