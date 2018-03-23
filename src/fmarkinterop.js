@@ -48,7 +48,7 @@ function generateHTML(uri,fPath) {
         for(var i = 0; i < doc.lineCount; ++i) {
             docArray.push(doc.lineAt(i).text);
         }
-        return beautify(fmark.processMarkdownString(fPath, docArray).data);
+        return fmark.processMarkdownString(fPath, docArray).data;
     });
 }
 

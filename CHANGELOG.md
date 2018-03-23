@@ -52,3 +52,11 @@ can be done with it
 
 - Fixed bug where no window would appear
 - updated to newest branch
+
+## 0.2.3
+
+- Fixed another small bug with js-beautify
+
+## 0.2.7
+
+- Major bug fix with dependencies
