@@ -1,5 +1,19 @@
 # Welcome to your VS Code Extension
 
+## Quickstart
+
+```
+git clone --recurse https://github.com/ymherklotz/FMark-vscode.git
+cd Fmark-vscode/src/FMark
+git checkout <your-branch>
+build.sh -b js
+```
+- On VSCode do 'Open Folder' and select FMark VSCode
+- Press F5 to launch the extension in a dev window
+- Open a .fmark file in the Dev window and press ctrl+shift+M to open the preview
+- Write some FMark markdown in the file and see the live preview
+- Ctrl+Shift+P, type FMark and select Create HTML File to generate a prettified HTML file.
+
 ## What's in the folder
 * This folder contains all of the files necessary for your extension.
 * `package.json` - this is the manifest file in which you declare your extension and command.

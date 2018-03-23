@@ -175,7 +175,7 @@
 				},
 				{
 					"name": "markup.italic.fmark",
-					"match": "_[a-zA-Z0-9*](.*)[a-zA-Z0-9*]_"
+					"match": "\\ _[a-zA-Z0-9*](.*)[a-zA-Z0-9*]_(\\ |$)"
 				},
 				{
 					"match": "`(.*)`",
@@ -186,16 +186,25 @@
 					}
 				},
 				{
-					"name": "markup.other.strikethrough.fmark",
-					"match": "~~[a-zA-Z0-9*_](.*)[a-zA-Z0-9*_]~~"
-				},
-				{
 					"name": "markup.bold.fmark",
-					"match": "__[a-zA-Z0-9*](.*)[a-zA-Z0-9*]__"
+					"match": "\\ __[a-zA-Z0-9*](.*)[a-zA-Z0-9*]__(\\ |$)"
 				},
 				{
 					"name": "markup.bold.fmark",
 					"match": "\\*\\*[a-zA-Z0-9_](.*)[a-zA-Z0-9_]\\*\\*"
+				},
+				{
+					"name": "markup.italic.fmark",
+					"match": "\\ ___[a-zA-Z0-9*](.*)[a-zA-Z0-9*]___(\\ |$)"
+					
+				},
+				{
+					"name": "markup.italic.fmark",
+					"match": "\\*\\*\\*[a-zA-Z0-9_](.*)[a-zA-Z0-9_]\\*\\*\\*"
+				},
+				{
+					"name": "markup.deleted.fmark",
+					"match": "~~[a-zA-Z0-9_](.*)[a-zA-Z0-9_]~~"
 				}
 			]
 		},

@@ -29,3 +29,7 @@ All notable changes to the "fmark" extension will be documented in this file.
 ## 0.1.4
 
 - Adding windows file path fix for relative includes
+
+## 0.1.5
+
+- Syntax highlighting underscores correctly. Triple asterisks/underscores highlighted as italic.
