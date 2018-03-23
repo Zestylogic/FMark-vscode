@@ -9,7 +9,7 @@ Namely:
 - Table of Contents generation
 - Citations and footnotes
 
-See [example.fmark](src/fmark/examples/example.fmark) for usage examples.
+See [example.fmark](https://github.com/ymherklotz/FMark/blob/master/examples/example.fmark) for usage examples.
 
 # How to use
 
