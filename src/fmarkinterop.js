@@ -22,7 +22,10 @@ class FMarkContentProvider {
     updateFMark(uri) {
         uri = vscode.window.activeTextEditor.document.uri;
         // New fix for windows, remove leading forward slash
-        var correctPath = (path.dirname(uri.path)+'/').replace(/^\//,"")
+        var correctPath = (path.dirname(uri.path)+'/')
+        if(process.platform == 'win32') {
+            correctPath.replace(/^\//,"");
+        }
         this.content = generateHTML(uri,correctPath);
         return this._onDidChange.fire(getPreviewUri(uri));
     }
@@ -39,20 +42,22 @@ class FMarkContentProvider {
 }
 
 function generateHTML(uri,fPath) {
-    var html = vscode.workspace.openTextDocument(uri).then((doc) => {
+    return vscode.workspace.openTextDocument(uri).then((doc) => {
         var docArray = [];
         for(var i = 0; i < doc.lineCount; ++i) {
             docArray.push(doc.lineAt(i).text);
         }
         return beautify(fmark.processMarkdownString(fPath, docArray).data);
     });
-    return html;
 }
 
 function makehtml(uri) {
     // Save to file
     uri = vscode.window.activeTextEditor.document.uri;
-    var correctPath = (path.dirname(uri.path)+'/').replace(/^\//,"");
+    var correctPath = (path.dirname(uri.path)+'/')
+    if(process.platform == 'win32') {
+        correctPath.replace(/^\//,"");
+    }
     var html = generateHTML(uri,correctPath);
     var filename = (vscode.window.activeTextEditor.document.fileName).replace(/(.*)(\.(fmark|md))/,"$1.html");
     fs.writeFileSync(filename, html._value);
@@ -74,15 +79,12 @@ function openPreview() {
 }
 
 function recompileFMarkFile(document) {
-    console.log('Recompiling: ' + document.uri.toString());
     console.log(fmark.processMarkdownString(document.getText()));
 }
 
 function recompileAllFMark() {
     vscode.workspace.textDocuments.forEach(document => {
-        console.log("Recompiling everything")
         if(isFMarkFile(document)) {
-            console.log("Found fmark file at: " + document.uri)
             recompileFMarkFile(document);
         }
     });
