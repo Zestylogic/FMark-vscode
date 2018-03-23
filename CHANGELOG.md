@@ -39,4 +39,6 @@ by displaying the raw input instead of hanging
 the %%TOC token
 
 - Added more documentation and examples of how to use FMark and cool things that
+
+- Syntax highlighting underscores correctly. Triple asterisks/underscores highlighted as italic.
 can be done with it

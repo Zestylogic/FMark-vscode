@@ -16,7 +16,7 @@ function activate(context) {
     // });
 
     context.subscriptions.push(vscode.commands.registerCommand('fmark.openPreview', finterop.openPreview));
-
+    context.subscriptions.push(vscode.commands.registerCommand('fmark.makehtml', finterop.makehtml));
     context.subscriptions.push(vscode.commands.registerCommand('fmark.recompile', contentProvider.updateFMark('')));
 
     context.subscriptions.push(vscode.workspace.onDidSaveTextDocument(document => {

@@ -26,6 +26,10 @@
             {
                 "command": "fmark.recompile",
                 "title": "FMark: Recompile"
+            },
+            {
+                "command": "fmark.makehtml",
+                "title": "FMark: Generate HTML File"
             }
         ],
         "keybindings": [
@@ -63,11 +67,8 @@
         "@types/mocha": "^2.2.42",
         "@types/node": "^7.0.43",
         "eslint": "^4.11.0",
+        "js-beautify": "^1.7.5",
         "typescript": "^2.6.1",
         "vscode": "^1.1.6"
-    },
-    "dependencies": {
-        "global": "^4.3.2",
-        "vsce": "^1.37.6"
     }
 }

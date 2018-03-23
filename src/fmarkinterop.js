@@ -1,5 +1,7 @@
 const vscode = require('vscode');
 const fmark = require('./FMark/FMark/js/fmark.js');
+const beautify = require('js-beautify').html;
+const fs = require('graceful-fs');
 const path = require('path');
 
 class FMarkContentProvider {
@@ -19,15 +21,9 @@ class FMarkContentProvider {
 
     updateFMark(uri) {
         uri = vscode.window.activeTextEditor.document.uri;
-        this.content = vscode.workspace.openTextDocument(uri).then((doc) => {
-            var docArray = [];
-            for(var i = 0; i < doc.lineCount; ++i) {
-                docArray.push(doc.lineAt(i).text);
-            }
-            
-            var correctPath = (path.dirname(uri.path)+'/').replace(/^[a-z]+:\//,"")
-            return fmark.processMarkdownString(correctPath, docArray).data;
-        });
+        // New fix for windows, remove leading forward slash
+        var correctPath = (path.dirname(uri.path)+'/').replace(/^\//,"")
+        this.content = generateHTML(uri,correctPath);
         return this._onDidChange.fire(getPreviewUri(uri));
     }
 
@@ -40,6 +36,27 @@ class FMarkContentProvider {
             }, 300);
         }
     }
+}
+
+function generateHTML(uri,fPath) {
+    var html = vscode.workspace.openTextDocument(uri).then((doc) => {
+        var docArray = [];
+        for(var i = 0; i < doc.lineCount; ++i) {
+            docArray.push(doc.lineAt(i).text);
+        }
+        return beautify(fmark.processMarkdownString(fPath, docArray).data);
+    });
+    return html;
+}
+
+function makehtml(uri) {
+    // Save to file
+    uri = vscode.window.activeTextEditor.document.uri;
+    var correctPath = (path.dirname(uri.path)+'/').replace(/^\//,"");
+    var html = generateHTML(uri,correctPath);
+    var filename = (vscode.window.activeTextEditor.document.fileName).replace(/(.*)(\.(fmark|md))/,"$1.html");
+    fs.writeFileSync(filename, html._value);
+    return true;
 }
 
 function isFMarkFile(document) {
@@ -73,9 +90,7 @@ function recompileAllFMark() {
 
 function getPreviewUri(uri) {
     var previewUri = uri;
-
     previewUri = vscode.Uri.parse('fmark-preview://single-preview.rendered');
-
     return previewUri;
 }
 
@@ -84,4 +99,5 @@ module.exports = {
     openPreview,
     isFMarkFile,
     getPreviewUri,
+    makehtml
 }
