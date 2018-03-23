@@ -64,3 +64,9 @@ can be done with it
 ## 0.2.10
 
 - Adding back beautify
+
+## 0.3.0
+
+- First semi-stable release
+- More bug fixes, such as fixing header id's when some headers are hidden.
+- Made the plugin more stable
