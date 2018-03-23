@@ -60,3 +60,7 @@ can be done with it
 ## 0.2.7
 
 - Major bug fix with dependencies
+
+## 0.2.10
+
+- Adding back beautify
