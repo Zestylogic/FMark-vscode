@@ -24,8 +24,8 @@ class FMarkContentProvider {
         uri = vscode.window.activeTextEditor.document.uri;
         // New fix for windows, remove leading forward slash
         var correctPath = (path.dirname(uri.path)+'/')
-        if(process.platform == 'win32') {
-            correctPath.replace(/^\//,"");
+        if (process.platform == 'win32') {
+            correctPath = correctPath.replace(/^\//,"");
         }
         this.content = generateHTML(uri,correctPath);
         return this._onDidChange.fire(getPreviewUri(uri));
