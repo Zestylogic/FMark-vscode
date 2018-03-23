@@ -32,7 +32,7 @@ All notable changes to the "fmark" extension will be documented in this file.
 
 ## 0.2.0
 
-- Fixed most bugs, and will not fail smoothly when an error occurs,
+- Fixed most bugs, and will now fail smoothly when an error occurs,
 by displaying the raw input instead of hanging
 
 - Added TOC support for Table of Contents, which can be created anywhere using
@@ -47,3 +47,8 @@ can be done with it
 
 - Fixing windows issue with wrong relative filepath
 - Removed the recompilation option as that is done automatically now
+
+## 0.2.2
+
+- Fixed bug where no window would appear
+- updated to newest branch

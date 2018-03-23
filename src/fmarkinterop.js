@@ -9,6 +9,7 @@ class FMarkContentProvider {
     constructor (context) {
         this._onDidChange = new vscode.EventEmitter();
         this._waiting = false;
+        this.content = "";
     }
 
     provideTextDocumentContent(previewUri) {
