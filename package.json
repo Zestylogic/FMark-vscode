@@ -2,7 +2,7 @@
     "name": "fmark",
     "displayName": "FMark",
     "description": "FMark plugin",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "publisher": "fmark",
     "repository": "https://github.com/ymherklotz/FMark-vscode",
     "engines": {

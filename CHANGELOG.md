@@ -40,5 +40,10 @@ the %%TOC token
 
 - Added more documentation and examples of how to use FMark and cool things that
 
-- Syntax highlighting underscores correctly. Triple asterisks/underscores highlighted as italic.
+- Syntax highlighting underscores correctly. Triple asterisks/underscores highlighted as italic
 can be done with it
+
+## 0.2.1
+
+- Fixing windows issue with wrong relative filepath
+- Removed the recompilation option as that is done automatically now
